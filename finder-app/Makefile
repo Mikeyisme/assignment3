@@ -1,15 +1,20 @@
+# Compiler settings, allows cross-compilation
 CC := $(CROSS_COMPILE)gcc
 CFLAGS := -Wall -Werror -g
 
 TARGET := writer
 
-SRC := finder-app/writer.c
-OBJ := $(SRC:.c=.o)
+SRC := writer.c
+OBJ := writer.o
 
 all: $(TARGET)
 
-$(TARGET): $(SRC)
+$(TARGET): $(OBJ)
 	$(CC) $(CFLAGS) -o $@ $^
+
+%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	rm -f $(TARGET) $(OBJ)
+
